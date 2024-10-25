@@ -17,7 +17,9 @@ function test(){
 </script>
 
 <template>
- <button @click="test">11111111</button>
+<div>
+    
+</div>
 </template>
 
 <style scoped>

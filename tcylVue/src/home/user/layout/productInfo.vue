@@ -2,6 +2,7 @@
 import { ref , onMounted } from "vue";
 import { useRoute ,useRouter} from 'vue-router';
 import {get_product_one_list,post_add_product_cart} from "@/home/uitls/result"
+import { Notification } from '@arco-design/web-vue';
 const route = useRoute();//路由
 const router = useRouter();//路由
 const product = ref({});//商品对象
@@ -24,10 +25,24 @@ const post_add_product_cart_metod=async () =>{
     if(userID.value===null){
         alert("需要登录才可加入，请先登录")
         router.push("/login")
+        
     }
-    let result_product_cart=post_add_product_cart(userID.value,productID.value,quantity.value,product.value.price);
-    if((await result).data.code===1){
-        alert("加入成功")
+    try {
+    const result = await post_add_product_cart(userID.value, productID.value, quantity.value, product.value.price);
+    console.log(result);
+    
+    if (result.code == 1) {
+        Notification.success({
+          title: '成功',
+          content: '商品已成功添加到购物车!',
+          position: "topLeft",
+      });
+    }
+  } catch (error) {
+    Notification.error({
+        title: '错误',
+        content: '添加商品到购物车失败，请重试。',
+    });
     }
 }
 </script>
@@ -59,7 +74,7 @@ const post_add_product_cart_metod=async () =>{
 
         <div class="button">
             <a-button-group> 
-                <a-button type="primary" size="large" long="true" @click="post_add_product_cart_metod">加入购物车</a-button>
+                <a-button type="primary" size="large" long="true"  @click="post_add_product_cart_metod">加入购物车</a-button>
                 <a-button type="primary" size="large" long="true">立即购买</a-button>
             </a-button-group>
         </div>

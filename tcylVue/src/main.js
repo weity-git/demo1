@@ -9,12 +9,14 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import router from './router'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import { Notification } from '@arco-design/web-vue';
 
 
 
 
 
 const app = createApp(App)
+Notification._context = app._context;
 app.use(router)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
