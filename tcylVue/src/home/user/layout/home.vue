@@ -1,11 +1,11 @@
 <script setup>
-import product from "./inedx_1.vue"
-
+import product from "./product_list.vue"
+import muen from "./menu.vue"
 </script>
 
 <template>
  <div class="flexbox">
-    <img src="/1.png" alt="">
+  <muen class="muen"></muen>
     <h1>天铖有利 购物平台</h1>
     <div class="search">
       <div>
@@ -40,10 +40,6 @@ html, body {
   display: flex;
   justify-content:end;
   align-items: center;
-  img{
-    width: 70px;
-    margin-right: auto;
-  }
   h1{
     display: block;
     color:aliceblue;
@@ -105,4 +101,10 @@ html, body {
 .below a{
     margin: 10%;
 }
+
+.muen{
+  margin-right: auto;
+  transform: translateX(50%);
+}
+
 </style>

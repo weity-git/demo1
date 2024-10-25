@@ -1,20 +1,29 @@
 <script setup >
 import{ ref ,onMounted} from "vue";
-import{post_login_users} from "../../uitls/result"
+import{post_login_users,post_login_users_code} from "../../uitls/result"
+import { useRouter } from 'vue-router';
 const phone=ref("");
+const code=ref("");
+const router=useRouter();
 onMounted(()=>{
 
 });
 
 const post_login_users_jk=async()=>{
     console.log(phone.value);
-    
-    let result=post_login_users(phone.value)
+    let result=post_login_users(phone.value);
     console.log((await result).data);
 }
+const post_add_cart=async()=>{
+    let re=post_login_users_code(phone.value,code.value);
+    const jk=(await re).data
+    console.log(jk);
+    localStorage.setItem("token",jk.token);
+    localStorage.setItem("userID",jk.userID);
+    router.push("/")
+}
+
 </script>
-
-
 <template>
 <div class="background-box">
     <div class="logo-box">
@@ -27,13 +36,13 @@ const post_login_users_jk=async()=>{
             <el-input v-model="phone" style="width: 280px" placeholder="请输入手机号" prefix-icon="User" />
             <br>
             <div>
-                <el-input  style="width: 180px" placeholder="请输入验证码" prefix-icon="Phone"  show-password/>
+                <el-input v-model="code" style="width: 180px" placeholder="请输入验证码" prefix-icon="Phone"  show-password/>
                 <el-button type="primary" @click="post_login_users_jk" >发送验证码</el-button>
             </div>
             
             <br>
             <div class="buuton">
-                <el-button type="primary" >登录</el-button>
+                <el-button type="primary" @click="post_add_cart" >登录</el-button>
             </div>
         </div>
 </div>

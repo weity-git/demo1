@@ -12,24 +12,28 @@ const router = createRouter({
     {
       path: '/',
       name: 'user',
-      component: () => import('../home/user/layout/inedx_1.vue')
+      component: () => import('../home/user/layout/home.vue')
     },  
     {
       path: '/productInfo/:id',
       name: 'productInfo',
       component: () => import('../home/user/layout/productInfo.vue')
     },
+     {
+      path: '/cart',
+      name: '/cart',
+      component: () => import('../home/user/menu_item/car.vue')
+    }  ,
+   {
+      path: '/orders',
+      name: '/orders',
+      component: () => import('../home/user/menu_item/order.vue')
+    }   ,
     {
-      path: '/admin',
-      name: 'home',
-      component: () => import('../App.vue')
-    },  
-    {
-      path: '/search',
-      name: 'search',
-      component: () => import('../home/user/layout/search.vue')
-    },
-
+      path: '/settings',
+      name: '/settings',
+      component: () => import('../home/user/menu_item/set.vue')
+    }  
   ]
 })
 

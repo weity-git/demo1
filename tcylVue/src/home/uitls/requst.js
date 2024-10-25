@@ -1,21 +1,22 @@
 import axios from "axios";
-import router from '@/router';
+import { useRouter } from 'vue-router';
 import URL from "@/configs/api_url.json";
 
  const instance=axios.create({
         baseURL:URL.api_url,
         timeout:1000*6
     });
-    
+    const router=useRouter();
     // 2.1 添加请求拦截器
     // 添加公共请求头、处理请求参数等
     instance.interceptors.request.use((config)=>{
         console.log("请求前校验");
         const token=localStorage.getItem("token");
-        config.headers['tcyl'] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGFpbXMiOnsicGhvbmUiOiIxMzAwMjM4NjgyMCJ9LCJleHAiOjE3Mjk3MTA2NTB9.dRRRfEdXuF85rM9F3w3WtSKfFA4q1AHN08zsYRVr7XE";
-/*         if(token){
-           
-        }; */
+        config.headers['tcyl'] = token;
+/*          if(token==null){
+           alert("身份信息验证失效")
+           router.push("/login")
+        };  */
         return config;
     }),(err)=>{
         return ProPromise.reject(err);// 在请求错误的时候的逻辑处理

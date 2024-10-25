@@ -1,5 +1,5 @@
 <script setup>
-import { ref , onMounted ,  reactive} from "vue";
+import { ref , onMounted } from "vue";
 import { useRoute ,useRouter} from 'vue-router';
 import {get_product_one_list,post_add_product_cart} from "@/home/uitls/result"
 const route = useRoute();//路由
@@ -52,7 +52,7 @@ const post_add_product_cart_metod=async () =>{
         <a-input-number :style="{width:'30%'}" placeholder="Please Enter" :default-value="1" mode="button" class="input-demo"  min="1"  v-model="quantity"/>
         <br>
         <a-divider />
-        <p>上架时间：{{product.listingTime}}</p>
+       <!--  <p>上架时间：{{product.listingTime}}</p> -->
         
         <span>库存量：{{product.stock}}</span>
         </div>
